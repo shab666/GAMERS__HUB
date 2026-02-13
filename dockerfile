@@ -1,17 +1,11 @@
-# Utiliser une image PHP avec extensions nécessaires
-FROM php:8.2-cli
+# Image PHP avec Apache et extensions courantes
+FROM php:8.2-apache
 
-# Installer les dépendances système pour Laravel
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    libzip-dev \
-    zip \
-    sqlite3 \
-    && docker-php-ext-install pdo pdo_sqlite zip
+# Activer PDO SQLite
+RUN docker-php-ext-install pdo pdo_sqlite
 
-# Copier le projet dans le container
-WORKDIR /var/www
+# Copier le projet
+WORKDIR /var/www/html
 COPY . .
 
 # Installer Composer
