@@ -1,15 +1,12 @@
-# Image PHP avec Apache et SQLite préinstallé
-FROM php:8.2-apache
+# Image Laravel officielle avec PHP 8.2 et SQLite
+FROM ghcr.io/coderocker/php:8.2-laravel
 
-# Copier le projet
+# Copier tout le projet
 WORKDIR /var/www/html
 COPY . .
 
-# Installer Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 # Installer les dépendances Laravel
-RUN composer install
+RUN composer install --no-interaction --optimize-autoloader
 
 # Générer la clé Laravel
 RUN php artisan key:generate
