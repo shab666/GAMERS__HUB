@@ -1,8 +1,5 @@
-# Image PHP avec Apache et extensions courantes
+# Image PHP avec Apache et SQLite préinstallé
 FROM php:8.2-apache
-
-# Activer PDO SQLite
-RUN docker-php-ext-install pdo pdo_sqlite
 
 # Copier le projet
 WORKDIR /var/www/html
@@ -11,7 +8,7 @@ COPY . .
 # Installer Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Installer les dépendances PHP
+# Installer les dépendances Laravel
 RUN composer install
 
 # Générer la clé Laravel
